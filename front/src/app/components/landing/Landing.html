@@ -1,0 +1,22 @@
+<div flex="100" layout="row" layout-align="center start" layout-wrap="layout-wrap" >
+   <div flex="100" class="search_top" flex="100" layout="row" layout-wrap layout-align="center center">
+     <md-autocomplete md-selected-item="$ctrl.selectedCity" md-search-text="searchText" md-items="city in $ctrl.handleSearch(searchText)" md-item-text="city.name" md-selected-item-change="$ctrl.getCityWeather($ctrl.selectedCity)">
+        <span md-highlight-text="searchText">{{city.name}}, {{city.isoCode}} </span>
+         <md-not-found>
+          No matches found. Search anyway!
+        </md-not-found>  
+      </md-autocomplete>
+     <div flex="100" layout="row" layout-align="center center">
+       <md-input-container flex>
+         <label> Latitude</label>
+         <input type="number" ng-model="search.lat">
+       </md-input-container>
+        <md-input-container flex>
+         <label> Longitude</label>
+         <input type="number" ng-model="search.lng">
+       </md-input-container>
+       <md-button ng-click="searchLatLng()"></md-button>
+     </div>
+   </div>
+   <weather-view ng-if="$ctrl.weatherData" weather-data="$ctrl.weatherData"></weather-view>
+  </div>
