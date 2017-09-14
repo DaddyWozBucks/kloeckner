@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nosifer|Noto+Sans|Press+Start+2P|Racing+Sans+One');
 @import 'app/components/landing/Landing.scss';
-@import '~angular-material/angular-material.css';
 @import 'app/assets/styles/weather-icons.css';
 @import 'app/assets/styles/weather-icons-wind.css';
 
@@ -69,8 +68,8 @@
       top: calc(100% - 50px);
     }
 .blog_header{
-  background: rgb(12,13,18);
-  color: white;
+  background: darkred;
+  color: black;
   blur: 5px;
   height:50px;
   @media screen and (max-width: 600px){
@@ -523,4 +522,10 @@
     bottom:0;
     width:300px;
   };
+}
+.w100 {
+  width: 100%;
+}
+app {
+  height: 100%;
 }

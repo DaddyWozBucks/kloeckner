@@ -23,7 +23,10 @@ export class WeatherService {
       cache: this.weatherCache
     };
     const deferred = this.q.defer();
-    this.http(req).then(response => deferred.resolve(response.data));
+    this.http(req).then(response => deferred.resolve(response.data), err => {
+      this.logger.log(err);
+      deferred.reject(err);
+    });
     return deferred.promise;
   }
   getCity(city) {
@@ -40,7 +43,10 @@ export class WeatherService {
     };
     this.logger.log(req);
     const deferred = this.q.defer();
-    this.http(req).then(response => deferred.resolve(response.data));
+    this.http(req).then(response => deferred.resolve(response.data), err => {
+      this.logger.log(err);
+      deferred.reject(err);
+    });
     return deferred.promise;
   }
 }

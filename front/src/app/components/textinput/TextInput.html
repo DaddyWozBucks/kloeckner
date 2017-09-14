@@ -1,0 +1,9 @@
+<div layout="row" class="mic" flex="100">
+  <md-input-container flex>
+  <label> Longitude</label>
+  <input class="textInput" ng-class="{'edit': $ctrl.editing, 'new-todo': $ctrl.newTodo}" ng-model="$ctrl.text" ng-keypress="$ctrl.handleSubmit($event)" ng-blur="$ctrl.handleBlur()" placeholder="{{$ctrl.placeholder}}" type="text" />
+</md-input-container>
+<md-button class="md-icon-button" ng-click="$ctrl.searchCity($ctrl.text)">
+  <i class="material-icons">search</i>
+</md-button>
+</div>

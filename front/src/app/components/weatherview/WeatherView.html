@@ -1,8 +1,68 @@
-<div flex="100" layout="row" layout-align="center center" layout-wrap>
-  {{$ctrl.weatherData}}
-  <div flex="100" flex-gt-sm="50" layout="row" layout-wrap layout-align="center center">
-    <div flex="100"  layout="row" layout-align="center center" >
-      
+  <div flex="100" layout="row" layout-wrap="layout-wrap" layout-align="center start" class="hmax">
+    <div flex="100" layout="row" layout-wrap="layout-wrap" layout-align="center center">
+      <h3 class="racing" flex="none" ng-show="$ctrl.weatherData.city.name"> {{$ctrl.weatherData.city.name}}</h3>
+      <h3 class="racing" flex="none" ng-show="!$ctrl.weatherData.city.name"> Latitude: {{$ctrl.lat}}, Longitude: {{$ctrl.lat}}</h3>
+    </div>
+    <div flex="100" layout="row" layout-wrap="layout-wrap" layout-align="center start">
+      <md-tabs md-selected="selectedIndex" md-border-bottom="" md-dynamic-height="md-dynamic-height" flex="100" md-center-tabs="true">
+        <md-tab ng-repeat="(key, data) in $ctrl.weatherData" ng-if="key != 'city'" label="{{key}}">
+          <div layout-fill="layout-fill" layout="row" layout-wrap="layout-wrap" layout-align="center start">
+            <div style="padding: 5px; text-align: center;" flex="90" flex-gt-xs="50" layout="row" layout-wrap="layout-wrap" layout-align="center center">
+              <md-list flex="100">
+                <md-list-item ng-repeat="datum in data.dataPoints" layout="row" layout-align="space-between center">
+                  <h4 flex="20">{{datum.dt | unix:'HH:mm'}}</h4><i flex="20" style="font-size:30px;" ng-class="getIcon(datum)"></i>
+                  <p flex="20">{{datum.weather[0].main}}</p>
+                  <p flex="20">{{datum.main.temp | kelvinFormat:$ctrl.tempView}}</p>
+                  <p flex="20">{{datum.wind.speed| kph}}</p>
+                </md-list-item>
+              </md-list>
+            </div>
+            <div style="padding: 5px; text-align: center;" flex="90" flex-gt-xs="50" layout="row" layout-wrap="layout-wrap" layout-align="center center">
+              <div flex="100" layout="row" layout-align="center center" layout-wrap="layout-wrap">
+                <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
+                  <div flex="100" layout="row">
+                    <div flex="100" layout="row" layout-align="space-around center" class="chart_title"><i flex="none" class="wi wi-thermometer"></i>
+                      <h4 flex="none">Temperature</h4>
+                      <h4 flex="none">Avg: {{data.averages.temp | kelvinFormat:tempView}}</h4>
+                    </div>
+                  </div>
+                  <canvas id="radar" chart-data="data.charts.temp.val" chart-options="options" chart-labels="data.charts.temp.labels" class="chart chart-line"></canvas>
+                </div>
+                <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
+                  <div flex="100" layout="row">
+                    <div flex="100" layout="row" layout-align="space-around center" class="chart_title"><i flex="none" class="wi wi-barometer"></i>
+                      <h4 flex="none">Pressure</h4>
+                      <h4 flex="none">Avg: {{data.averages.pressure|number:0}} hPa</h4>
+                    </div>
+                  </div>
+                  <canvas id="radar" chart-data="data.charts.pressure.val" chart-options="options" chart-labels="data.charts.pressure.labels" class="chart chart-line"></canvas>
+                </div>
+                <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
+                  <div flex="100" layout="row">
+                    <div flex="100" layout="row" layout-align="space-around center" class="chart_title"><i flex="none" class="wi wi-humidity"></i>
+                      <h4 flex="none">Humidity</h4>
+                      <h4 flex="none">Avg: {{data.averages.humidity | number:0 }} %</h4>
+                    </div>
+                  </div>
+                  <canvas id="radar" chart-data="data.charts.humidity.val" chart-options="options" chart-labels="data.charts.humidity.labels" class="chart chart-line"></canvas>
+                </div>
+                <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
+                  <div flex="100" layout="row">
+                    <div flex="100" layout="row" layout-align="space-around center" class="chart_title"><i flex="none" class="wi wi-strong-wind"></i>
+                      <h4 flex="none">Wind Speed</h4>
+                      <h4 flex="none">Avg: {{data.averages.wind_speed | kph}}</h4>
+                    </div>
+                  </div>
+                  <canvas id="radar" chart-data="data.charts.wind.val" chart-options="options" chart-labels="data.charts.wind.labels" class="chart chart-line"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-tab>
+      </md-tabs>
+    </div>
+    <div flex="100" layout="column" layout-align="center center" class="error_box" ng-if="!$ctrl.matchBool" ng-click="$ctrl.matchBool = !$ctrl.matchBool">
+       <h3 flex="none"> Did you mean?</h3>
+      <h2 flex="none"> {{$ctrl.matchPrompt}} </h2>
     </div>
   </div>
-</div>

@@ -79,6 +79,10 @@ module.exports = {
       template: conf.path.src('index.html')
     }),
     new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
+    new webpack.IgnorePlugin(/(locale)/, /node_modules.+(moment)/),
+    new webpack.LoaderOptionsPlugin({
       options: {
         postcss: () => [autoprefixer]
       },

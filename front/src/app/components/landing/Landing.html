@@ -1,22 +1,36 @@
-<div flex="100" layout="row" layout-align="center start" layout-wrap="layout-wrap" >
-   <div flex="100" class="search_top" flex="100" layout="row" layout-wrap layout-align="center center">
-     <md-autocomplete md-selected-item="$ctrl.selectedCity" md-search-text="searchText" md-items="city in $ctrl.handleSearch(searchText)" md-item-text="city.name" md-selected-item-change="$ctrl.getCityWeather($ctrl.selectedCity)">
-        <span md-highlight-text="searchText">{{city.name}}, {{city.isoCode}} </span>
-         <md-not-found>
-          No matches found. Search anyway!
-        </md-not-found>  
-      </md-autocomplete>
-     <div flex="100" layout="row" layout-align="center center">
-       <md-input-container flex>
-         <label> Latitude</label>
-         <input type="number" ng-model="search.lat">
-       </md-input-container>
-        <md-input-container flex>
-         <label> Longitude</label>
-         <input type="number" ng-model="search.lng">
-       </md-input-container>
-       <md-button ng-click="searchLatLng()"></md-button>
-     </div>
-   </div>
-   <weather-view ng-if="$ctrl.weatherData" weather-data="$ctrl.weatherData"></weather-view>
+<div flex="none" ng-class="{'search_found': $ctrl.weatherData, 'search_top': !$ctrl.weatherData}" layout="row" layout-align="center start" layout-wrap="layout-wrap">
+  <div flex="100" class="h100" flex="100" flex-gt-xs="50" layout="row" layout-wrap layout-align="center center">
+<!--
+    <md-autocomplete md-selected-item="$ctrl.selectedCity" md-search-text="searchText" md-items="city in $ctrl.handleSearch(searchText)" md-item-text="city.name" md-selected-item-change="$ctrl.getCityWeather($ctrl.selectedCity)">
+      <span md-highlight-text="searchText">{{city.name}}, {{city.isoCode}} </span>
+      <md-not-found>
+        Search for {{$ctrl.searchText}}
+      </md-not-found>
+    </md-autocomplete>
+-->
+   <text-input
+    on-save="$ctrl.getCityWeather(text)"
+    placeholder="Where do you need a forecast for?"
+  ></text-input>
+   
   </div>
+  <div class="mic h100" flex="100" flex-gt-xs="50" layout="row" layout-wrap-xs layout-align="center center">
+    <md-input-container flex="30">
+      <label> Latitude</label>
+      <input type="number" ng-model="$ctrl.search.lat">
+    </md-input-container>
+    <md-input-container flex="30">
+      <label> Longitude</label>
+      <input type="number" ng-model="$ctrl.search.lng">
+    </md-input-container>
+    <md-button class="md-icon-button" ng-click="$ctrl.searchLatLng()">
+      <i class="material-icons">search</i>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="$ctrl.randomLatlngs()">
+      <i class="material-icons">shuffle</i>
+    </md-button>
+  </div>
+</div>
+<div flex layout="column">
+<weather-view flex="100" ng-if="$ctrl.weatherData" weather-data="$ctrl.weatherData" lat="$ctrl.search.lat" lng="$ctrl.search.lng" match-bool="$ctrl.matchBool" match-prompt="$ctrl.matchPrompt"></weather-view>
+</div>
