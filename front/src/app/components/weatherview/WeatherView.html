@@ -14,7 +14,7 @@
             <div style="padding: 5px; text-align: center;" flex="90" flex-gt-xs="50" layout="row" layout-wrap="layout-wrap" layout-align="center center">
               <md-list flex="100">
                 <md-list-item ng-repeat="datum in data.dataPoints" layout="row" layout-align="space-between center">
-                  <h4 flex="20">{{datum.dt | unix:'HH:mm'}}</h4><i flex="20" style="font-size:30px;" ng-class="getIcon(datum)"></i>
+                  <h4 flex="20">{{datum.dt | unix:'HH:mm'}}</h4><i flex="20" style="font-size:30px;" ng-class="$ctrl.getIcon(datum)"></i>
                   <p flex="20">{{datum.weather[0].main}}</p>
                   <p flex="20">{{datum.main.temp | kelvinFormat:$ctrl.tempView}}</p>
                   <p flex="20">{{datum.wind.speed| kph}}</p>
