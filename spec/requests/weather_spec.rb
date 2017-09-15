@@ -40,7 +40,7 @@ RSpec.describe 'Weather API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/weather/city', params: { city: 'Azkerban' } }
+      before { post '/weather/city', params: { city: '' } }
       
       it 'returns status code 400' do
         expect(response).to have_http_status(400)
