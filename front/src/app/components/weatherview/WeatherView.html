@@ -2,6 +2,10 @@
     <div flex="100" layout="row" layout-wrap="layout-wrap" layout-align="center center">
       <h3 class="racing" flex="none" ng-show="$ctrl.weatherData.city.name"> {{$ctrl.weatherData.city.name}}</h3>
       <h3 class="racing" flex="none" ng-show="!$ctrl.weatherData.city.name"> Latitude: {{$ctrl.lat}}, Longitude: {{$ctrl.lat}}</h3>
+      <div flex="none" layout="row" class="temp_ctrls" layout-align="space-around center">
+        <h4 class="nom" ng-click="toggleScale('F')" ng-class="{'active_scale': $ctrl.tempView === 'F'}">F</h4>
+        <h4 class="nom" ng-click="toggleScale('C')" ng-class="{'active_scale': $ctrl.tempView === 'C'}">C</h4>
+      </div>
     </div>
     <div flex="100" layout="row" layout-wrap="layout-wrap" layout-align="center start">
       <md-tabs md-selected="selectedIndex" md-border-bottom="" md-dynamic-height="md-dynamic-height" flex="100" md-center-tabs="true">
