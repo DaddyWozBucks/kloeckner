@@ -10,7 +10,9 @@
 -->
    <text-input
     on-save="$ctrl.getCityWeather(text)"
-    placeholder="Where do you need a forecast for?"
+    placeholder="eg: 'Berlin, DE'"
+      text="$ctrl.searchText"
+    
   ></text-input>
    
   </div>
@@ -33,4 +35,12 @@
 </div>
 <div flex layout="column">
 <weather-view flex="100" ng-if="$ctrl.weatherData" weather-data="$ctrl.weatherData" lat="$ctrl.search.lat" lng="$ctrl.search.lng" match-bool="$ctrl.matchBool" match-prompt="$ctrl.matchPrompt"></weather-view>
+</div>
+ <div flex="100" layout="column" layout-align="center center" class="error_box" ng-if="!$ctrl.matchBool" ng-click="$ctrl.matchBool = !$ctrl.matchBool">
+      <div id="backdrop"></div>
+       <h3 flex="none"> Did you mean?</h3>
+      <h2 flex="none"> {{$ctrl.matchPrompt}} </h2>
+      <md-button ng-click="$ctrl.clearSearch()"> 
+        <h4> Try again </h4>
+      </md-button>
 </div>

@@ -28,9 +28,9 @@ class TextInputController {
         this.toaster.show(this.toaster.simple().textContent('Please include Country code, eg: "Berlin, DE"'));
       } else {
         this.onSave({text: this.text});
-        if (this.newTodo) {
-          this.text = '';
-        }
+//        if (this.newTodo) {
+//          this.text = '';
+//        }
       }
     }
   }

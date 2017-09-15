@@ -1,3 +1,5 @@
+@import 'app/constants/Mixins.scss'; 
+  
 .search_top{
   top: -50;
   background-color: lightcoral;
@@ -43,12 +45,22 @@ weather-view {
   height: 100%;
   z-index: 20;
   position: absolute;
-  background-color: transparentize(darkred, 0.1);
+  background-color: transparentize(#eee, 0.5);
+  blur: 5px;
   top: 0;
   left: 0;
   right: 0;
-  color: white;
+  color: darkred;
   @extend .racing;
+ 
+  #backdrop {
+    @include blur(5px);
+    width: 100%;
+    height: 100%;
+    z-index: 18;
+    position: absolute;
+    background-color: transparentize(#eee, 0.5);
+  }
 }
 .hmax {
   height: 100%;

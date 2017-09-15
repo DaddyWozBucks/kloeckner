@@ -5,27 +5,28 @@ class LandingController {
     this.logger = $log;
     this.weatherService = weatherService;
     this.cityService = cityService;
-    this.handleSearch('berlin, DE');
+    this.getCityWeather('berlin, DE');
     this.search = {
       lat: 0.00,
       lng: 0.00
     };
     this.searchText = '';
-    this.matchBool = false;
+    this.matchBool = true;
     this.matchPrompt = '';
   }
   handleError(err) {
     this.logger.log(err + ' ERROR');
   }
   getCityWeather(city) {
-    this.weatherService.getCity(city).then(data => this.setWeather(data));
+    this.searchText = city;
+    this.logger.log(this.searchText + '  : searchtext');
+    this.weatherService.getCity(city).then(data => this.setWeather(data, 'text', city), err => this.handleError(err));
   }
-  checkResults(result) {
-    this.logger.log(result.city.name);
-    this.logger.log(this.searchText);
-    this.logger.log(this.searchText.indexOf(result.city.name) < 0);
+  checkResults(result, text) {
+    this.logger.log(text + '  :text');
+    this.logger.log(angular.lowercase(text).includes(angular.lowercase(result.city.name)));
     if (result) {
-      if (this.searchText === result.city.name) {
+      if (angular.lowercase(text).includes(angular.lowercase(result.city.name)) > 0) {
         this.matchBool = true;
       } else {
         this.matchBool = false;
@@ -36,21 +37,29 @@ class LandingController {
       this.matchPrompt = false;
     }
   }
-  setWeather(weather) {
-    this.matchBool = false;
+  clearSearch() {
+    this.matchBool = true;
     this.weatherData = false;
-    this.checkResults(weather);
+    this.searchText = '';
+  }
+  setWeather(weather, mode, text) {
+    this.matchBool = true;
+    this.weatherData = false;
+    if (mode === 'text') {
+      this.checkResults(weather, text);
+    }
     this.weatherData = weather;
   }
   handleSearch(text) {
     this.searchText = text;
-    this.logger.log(this.searchText);
-    return this.cityService.searchName(text).then(data => data, err => this.handleError(err));
+    this.logger.log(this.searchText + '  : searchtext');
+    return this.cityService.searchName(text).then(data => this.setWeather(data, 'text', text), err => this.handleError(err));
   }
   searchLatLng() {
-    return this.weatherService.getLatLng(this.search.lat, this.search.lng).then(data => this.setWeather(data), err => this.handleError(err));
+    return this.weatherService.getLatLng(this.search.lat, this.search.lng).then(data => this.setWeather(data, 'll'), err => this.handleError(err));
   }
   randomLatlngs() {
+    this.searchText = '';
     this.search.lat = this.getRandomInRange(-90, 90, 3);
     this.search.lng = this.getRandomInRange(-180, 180, 3);
     this.searchLatLng();

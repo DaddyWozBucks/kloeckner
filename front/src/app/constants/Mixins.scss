@@ -1,0 +1,7 @@
+@mixin blur($vpx) {
+   -webkit-filter: blur($vpx);
+  -moz-filter: blur($vpx);
+  -o-filter: blur($vpx);
+  -ms-filter: blur($vpx);
+  filter: blur($vpx);
+}

@@ -33,4 +33,5 @@ angular
   .filter('timeFormat', TimeFormat)
   .filter('distChar', DistChar)
   .filter('unix', Unix)
-  .filter('kelvin', Kelvin);
+  .filter('kelvin', Kelvin)
+  .config(ChartJsProvider => ChartJsProvider.setOptions({colors: ['#F44336', '#EF9A9A', '#90CAF9', '#1565C0', '#00BCD4', '#006064', '#4D5360']}));

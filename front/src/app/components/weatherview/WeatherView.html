@@ -26,7 +26,7 @@
                       <h4 flex="none">Avg: {{data.averages.temp | kelvinFormat:tempView}}</h4>
                     </div>
                   </div>
-                  <canvas id="radar" chart-data="data.charts.temp.val" chart-options="options" chart-labels="data.charts.temp.labels" class="chart chart-line"></canvas>
+                  <canvas id="radar" chart-data="data.charts.temp.val" chart-options="options" chart-labels="data.charts.temp.labels" class="chart chart-line" chart-colors="['#E57373']"></canvas>
                 </div>
                 <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
                   <div flex="100" layout="row">
@@ -35,7 +35,7 @@
                       <h4 flex="none">Avg: {{data.averages.pressure|number:0}} hPa</h4>
                     </div>
                   </div>
-                  <canvas id="radar" chart-data="data.charts.pressure.val" chart-options="options" chart-labels="data.charts.pressure.labels" class="chart chart-line"></canvas>
+                  <canvas id="radar" chart-data="data.charts.pressure.val" chart-options="options" chart-labels="data.charts.pressure.labels" class="chart chart-line" chart-colors="['#42A5F5']"></canvas>
                 </div>
                 <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
                   <div flex="100" layout="row">
@@ -44,7 +44,7 @@
                       <h4 flex="none">Avg: {{data.averages.humidity | number:0 }} %</h4>
                     </div>
                   </div>
-                  <canvas id="radar" chart-data="data.charts.humidity.val" chart-options="options" chart-labels="data.charts.humidity.labels" class="chart chart-line"></canvas>
+                  <canvas id="radar" chart-data="data.charts.humidity.val" chart-options="options" chart-labels="data.charts.humidity.labels" chart-colors="['#26C6DA']" class="chart chart-line"></canvas>
                 </div>
                 <div style="padding: 5px; text-align: center;" layout="row" layout-wrap="layout-wrap" flex="100" flex-gt-xs="50">
                   <div flex="100" layout="row">
@@ -53,16 +53,12 @@
                       <h4 flex="none">Avg: {{data.averages.wind_speed | kph}}</h4>
                     </div>
                   </div>
-                  <canvas id="radar" chart-data="data.charts.wind.val" chart-options="options" chart-labels="data.charts.wind.labels" class="chart chart-line"></canvas>
+                  <canvas id="radar" chart-data="data.charts.wind.val" chart-options="options" chart-labels="data.charts.wind.labels" chart-colors="['#89d17f']" class="chart chart-line"></canvas>
                 </div>
               </div>
             </div>
           </div>
         </md-tab>
       </md-tabs>
-    </div>
-    <div flex="100" layout="column" layout-align="center center" class="error_box" ng-if="!$ctrl.matchBool" ng-click="$ctrl.matchBool = !$ctrl.matchBool">
-       <h3 flex="none"> Did you mean?</h3>
-      <h2 flex="none"> {{$ctrl.matchPrompt}} </h2>
     </div>
   </div>
